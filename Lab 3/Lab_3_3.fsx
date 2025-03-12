@@ -1,8 +1,8 @@
 open System
 
-// Сообщения
+// РЎРѕРѕР±С‰РµРЅРёСЏ
 let start_stop_mes () = 
-    printfn "\n ____________________________ \nВыбеирте действие \n 1. Начать работу \n 2. Завершить работу"
+    printfn "\n ____________________________ \nР’С‹Р±РµРёСЂС‚Рµ РґРµР№СЃС‚РІРёРµ \n 1. РќР°С‡Р°С‚СЊ СЂР°Р±РѕС‚Сѓ \n 2. Р—Р°РІРµСЂС€РёС‚СЊ СЂР°Р±РѕС‚Сѓ"
 
 
 let rec main () = 
@@ -10,33 +10,35 @@ let rec main () =
     let choice = Console.ReadLine()
 
     match choice with
-        // Переходим к выполнению
+        // РџРµСЂРµС…РѕРґРёРј Рє РІС‹РїРѕР»РЅРµРЅРёСЋ
         | "1" -> 
-            printfn "Укажите директорию, в которой необходимо произвести поиск: "
+            printfn "РЈРєР°Р¶РёС‚Рµ РґРёСЂРµРєС‚РѕСЂРёСЋ, РІ РєРѕС‚РѕСЂРѕР№ РЅРµРѕР±С…РѕРґРёРјРѕ РїСЂРѕРёР·РІРµСЃС‚Рё РїРѕРёСЃРє: "
             let directory = Console.ReadLine()
 
             if IO.Directory.Exists(directory) then
                 
-                let listik = IO.Directory.GetFiles(directory, "*", IO.SearchOption.AllDirectories) |> Array.toList
-                if listik.Length > 0 then
-                    let res = listik |> List.map (fun (i:string) -> IO.Path.GetFileName(i)) |> List.sortWith compare 
-                    res |> List.iter (printfn "file: %s")
-                    res[res.Length-1] |> printfn "Последний по алфавиту файл: %s"
+                let file_seq = IO.Directory.GetFiles(directory, "*", IO.SearchOption.AllDirectories) |> Array.toSeq  
+                
+                if IO.Directory.GetFiles(directory, "*", IO.SearchOption.AllDirectories).Length > 0 then
+                    let res = file_seq |> Seq.map (fun (i:string) -> IO.Path.GetFileName(i)) |> Seq.sortWith compare 
+                    res |> Seq.iter (printfn "file: %s")
+
+                    Seq.reduce (fun _ i -> i) res |> printfn "РџРѕСЃР»РµРґРЅРёР№ РїРѕ Р°Р»С„Р°РІРёС‚Сѓ С„Р°Р№Р»: %s"
 
                 else 
-                    printfn "Указанная директория пуста"
+                    printfn "РЈРєР°Р·Р°РЅРЅР°СЏ РґРёСЂРµРєС‚РѕСЂРёСЏ РїСѓСЃС‚Р°"
             else
-                printfn "Некорректно указана директория"
+                printfn "РќРµРєРѕСЂСЂРµРєС‚РЅРѕ СѓРєР°Р·Р°РЅР° РґРёСЂРµРєС‚РѕСЂРёСЏ"
 
 
             main ()
             ()
-        // Завершаем программу
+        // Р—Р°РІРµСЂС€Р°РµРј РїСЂРѕРіСЂР°РјРјСѓ
         | "2" -> ()
 
-        // Повторный ввод
+        // РџРѕРІС‚РѕСЂРЅС‹Р№ РІРІРѕРґ
         | _ ->
-            printfn "Ошибка ввода"
+            printfn "РћС€РёР±РєР° РІРІРѕРґР°"
             main ()
             ()
 
