@@ -1,36 +1,36 @@
 open System
 
-// Сообщения
+// РЎРѕРѕР±С‰РµРЅРёСЏ
 let start_stop_mes () = 
-    printfn "\n ____________________________ \nВыбеирте действие \n 1. Начать работу \n 2. Завершить работу"
+    printfn "\n ____________________________ \nР’С‹Р±РµРёСЂС‚Рµ РґРµР№СЃС‚РІРёРµ \n 1. РќР°С‡Р°С‚СЊ СЂР°Р±РѕС‚Сѓ \n 2. Р—Р°РІРµСЂС€РёС‚СЊ СЂР°Р±РѕС‚Сѓ"
 let option_mes () = 
-    printfn "\n Выберите действие, которое  хотите выполнить
-    \n 1. Заполнить дерево случайно \n 2. Заполнить дерево руками \n 3. Заполнить дерево из файла \n 4. Вернуться в главное меню" 
+    printfn "\n Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, РєРѕС‚РѕСЂРѕРµ  С…РѕС‚РёС‚Рµ РІС‹РїРѕР»РЅРёС‚СЊ
+    \n 1. Р—Р°РїРѕР»РЅРёС‚СЊ РґРµСЂРµРІРѕ СЃР»СѓС‡Р°Р№РЅРѕ \n 2. Р—Р°РїРѕР»РЅРёС‚СЊ РґРµСЂРµРІРѕ СЂСѓРєР°РјРё \n 3. Р—Р°РїРѕР»РЅРёС‚СЊ РґРµСЂРµРІРѕ РёР· С„Р°Р№Р»Р° \n 4. Р’РµСЂРЅСѓС‚СЊСЃСЏ РІ РіР»Р°РІРЅРѕРµ РјРµРЅСЋ" 
 
-// Ввод количества элементов дерева
+// Р’РІРѕРґ РєРѕР»РёС‡РµСЃС‚РІР° СЌР»РµРјРµРЅС‚РѕРІ РґРµСЂРµРІР°
 let col_input () = 
-    printfn "Введите количество элементов в дереве: "
+    printfn "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ РґРµСЂРµРІРµ: "
     
     try 
        Console.ReadLine() |> int
     with
-        | :? System.FormatException -> printfn "Ошибка ввода"; Int32.MinValue
-        | ex -> printfn "Переполнение"; 0
+        | :? System.FormatException -> printfn "РћС€РёР±РєР° РІРІРѕРґР°"; Int32.MinValue
+        | ex -> printfn "РџРµСЂРµРїРѕР»РЅРµРЅРёРµ"; 0
 
-// Ввод действительного числа
+// Р’РІРѕРґ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ С‡РёСЃР»Р°
 let num_input () = 
     try 
         Console.ReadLine() |> float
     with
-        | :? System.FormatException -> printfn "Ошибка ввода"; Double.MinValue
-        | ex -> printfn "Переполнение"; Double.MinValue
+        | :? System.FormatException -> printfn "РћС€РёР±РєР° РІРІРѕРґР°"; Double.MinValue
+        | ex -> printfn "РџРµСЂРµРїРѕР»РЅРµРЅРёРµ"; Double.MinValue
 
-// Структура дерева поиска
+// РЎС‚СЂСѓРєС‚СѓСЂР° РґРµСЂРµРІР° РїРѕРёСЃРєР°
 type SearchTree = 
     | Node of float * SearchTree * SearchTree
     | Empty
 
-// Функция вставки в дерево
+// Р¤СѓРЅРєС†РёСЏ РІСЃС‚Р°РІРєРё РІ РґРµСЂРµРІРѕ
 let rec insert (leaf: SearchTree, value: float) : SearchTree  =
     match leaf with
         Empty -> 
@@ -45,32 +45,43 @@ let rec insert (leaf: SearchTree, value: float) : SearchTree  =
                 else
                     leaf
         
-        // Это все для вывода
-//Обходим левое поддерево, корень, потом правое поддерево
+        // Р­С‚Рѕ РІСЃРµ РґР»СЏ РІС‹РІРѕРґР°
+//РћР±С…РѕРґРёРј Р»РµРІРѕРµ РїРѕРґРґРµСЂРµРІРѕ, РєРѕСЂРµРЅСЊ, РїРѕС‚РѕРј РїСЂР°РІРѕРµ РїРѕРґРґРµСЂРµРІРѕ
 let infix root left right =
     (left ()
      root ()
      right ())
-// Выполняем проход по всему дереву
+// Р’С‹РїРѕР»РЅСЏРµРј РїСЂРѕС…РѕРґ РїРѕ РІСЃРµРјСѓ РґРµСЂРµРІСѓ
 let iterh f t =
     let rec tr t h =
         match t with
             | Node (x, L, R) ->
                 infix
-                    (fun () -> (f x h)) // обход корня
-                    (fun () -> tr L (h + 1)) // обход левого поддерева
-                    (fun () -> tr R (h + 1)) // обход прав. поддерева
+                    (fun () -> (f x h)) // РѕР±С…РѕРґ РєРѕСЂРЅСЏ
+                    (fun () -> tr L (h + 1)) // РѕР±С…РѕРґ Р»РµРІРѕРіРѕ РїРѕРґРґРµСЂРµРІР°
+                    (fun () -> tr R (h + 1)) // РѕР±С…РѕРґ РїСЂР°РІ. РїРѕРґРґРµСЂРµРІР°
             | Empty -> ()
  
     tr t 0
-//Вывод пробелов в количестве n
+//Р’С‹РІРѕРґ РїСЂРѕР±РµР»РѕРІ РІ РєРѕР»РёС‡РµСЃС‚РІРµ n
 let spaces n =
     List.fold (fun s _ -> s + " ") "" [ 0 .. n ]
-//Вывод дерева на экран (оно будет повернуто на 90 градусов)
+//Р’С‹РІРѕРґ РґРµСЂРµРІР° РЅР° СЌРєСЂР°РЅ (РѕРЅРѕ Р±СѓРґРµС‚ РїРѕРІРµСЂРЅСѓС‚Рѕ РЅР° 90 РіСЂР°РґСѓСЃРѕРІ)
 let print_tree T =
     iterh (fun x h -> printfn "%s%.3f" (spaces (h * 3)) x) T
 
-// Проверка, если ровно один из потомков - лист
+// Р¤РѕР»РґРёРЅР°
+let rec MyFold (func, root: SearchTree, listik) =
+    match root with
+    | Empty -> listik
+    | Node (_, Empty, Empty) -> listik
+    | Node(data, left, right) 
+        ->
+            let listik = MyFold (func, left, listik)
+            let listik = MyFold (func, right, listik)
+            func (root, listik, data)
+
+// РџСЂРѕРІРµСЂРєР°, РµСЃР»Рё СЂРѕРІРЅРѕ РѕРґРёРЅ РёР· РїРѕС‚РѕРјРєРѕРІ - Р»РёСЃС‚
 let check_if_leaf (root: SearchTree): bool = 
     match root with
         | Empty -> false
@@ -81,44 +92,36 @@ let check_if_leaf (root: SearchTree): bool =
                 else 
                     false
 
-// Фолдина 
-let rec MyFold (root:SearchTree) = 
-    [
-        match root with
-        | Node (data, left, right) 
-            -> 
-                if ( check_if_leaf(left) && not(check_if_leaf(right)) ) || ( not(check_if_leaf(left)) && check_if_leaf(right) ) then
-                    yield data
-                else
-                    ()
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё, С‡С‚Рѕ Р»РёСЃС‚ С‚РѕР»СЊРєРѕ РѕРґРёРЅ
+let check_if_only_one (root: SearchTree, listik, data: float) =
+    match root with
+    | Node(_, left, right) 
+        -> 
+            if (check_if_leaf(left) && not(check_if_leaf(right)) || not(check_if_leaf(left)) && check_if_leaf(right)) then
+                data :: listik
+            else 
+                listik
 
-                let l1 = MyFold(left)
-                for el in l1 do
-                    yield el
+    | _ 
+        -> listik
 
-                let l2 = MyFold(right)
-                for ell in l2 do
-                    yield ell
 
-        | Empty -> ()
-    ]
-
-// Псевдо - Мейн
+// РџСЃРµРІРґРѕ - РњРµР№РЅ
 let rec main () = 
     start_stop_mes()
     let choice = Console.ReadLine()
 
     match choice with
-        // Переходим к выбору функций
+        // РџРµСЂРµС…РѕРґРёРј Рє РІС‹Р±РѕСЂСѓ С„СѓРЅРєС†РёР№
         | "1" -> 
             next_func ()
             ()
-        // Завершаем программу
+        // Р—Р°РІРµСЂС€Р°РµРј РїСЂРѕРіСЂР°РјРјСѓ
         | "2" -> ()
 
-        // Повторный ввод
+        // РџРѕРІС‚РѕСЂРЅС‹Р№ РІРІРѕРґ
         | _ ->
-            printfn "Ошибка ввода"
+            printfn "РћС€РёР±РєР° РІРІРѕРґР°"
             main ()
             ()
 
@@ -127,11 +130,11 @@ and next_func () =
     let option = Console.ReadLine()
 
     match option with
-        // Ввод рандомно
+        // Р’РІРѕРґ СЂР°РЅРґРѕРјРЅРѕ
         | "1" -> 
             let col = col_input()
 
-            // Заполняем список элементов дерева
+            // Р—Р°РїРѕР»РЅСЏРµРј СЃРїРёСЃРѕРє СЌР»РµРјРµРЅС‚РѕРІ РґРµСЂРµРІР°
             let el_list = 
                 [
                     for i in 1 .. col do
@@ -140,80 +143,79 @@ and next_func () =
                         yield rdm_val / rdm_tail
                 ]
 
-            // Проверка
+            // РџСЂРѕРІРµСЂРєР°
             if col <= 0 then 
-                printfn " Невозможно создать дерево из %d чисел" col
+                printfn " РќРµРІРѕР·РјРѕР¶РЅРѕ СЃРѕР·РґР°С‚СЊ РґРµСЂРµРІРѕ РёР· %d С‡РёСЃРµР»" col
             else 
-                // Заполняем дерево из списка
+                // Р—Р°РїРѕР»РЅСЏРµРј РґРµСЂРµРІРѕ РёР· СЃРїРёСЃРєР°
                 let derevo: SearchTree = List.fold (fun root value -> insert(root, value)) Empty el_list
-                printfn "\n Дерево"
+                printfn "\n Р”РµСЂРµРІРѕ"
                 print_tree(derevo)
 
-                // Применяем фолд
-                printfn "Результат"
-                MyFold(derevo) |> List.iter (printfn "%.3f")
+                // РџСЂРёРјРµРЅСЏРµРј С„РѕР»Рґ
+                printfn "Р РµР·СѓР»СЊС‚Р°С‚"
+                MyFold(check_if_only_one, derevo, []) |> List.iter (printfn "%.3f")
                 
-            
-                
-                    
+                                
             next_func()
 
-        // Ввод руками
+        // Р’РІРѕРґ СЂСѓРєР°РјРё
         | "2" -> 
             let col = col_input()
 
-            // Заполняем список элементов дерева
+            // Р—Р°РїРѕР»РЅСЏРµРј СЃРїРёСЃРѕРє СЌР»РµРјРµРЅС‚РѕРІ РґРµСЂРµРІР°
             let el_list = 
                 [
                     for i in 1 .. col do
-                        printf "Элемент №%d: " i
+                        printf "Р­Р»РµРјРµРЅС‚ в„–%d: " i
                         yield num_input()
                 ]
 
-            // Проверка
+            // РџСЂРѕРІРµСЂРєР°
             if col <= 0 then 
-                printfn " Невозможно создать дерево из %d чисел" col
+                printfn " РќРµРІРѕР·РјРѕР¶РЅРѕ СЃРѕР·РґР°С‚СЊ РґРµСЂРµРІРѕ РёР· %d С‡РёСЃРµР»" col
             else 
-                // Заполняем дерево из списка
+                // Р—Р°РїРѕР»РЅСЏРµРј РґРµСЂРµРІРѕ РёР· СЃРїРёСЃРєР°
                 let derevo: SearchTree = List.fold (fun root value -> insert(root, value)) Empty el_list
-                printfn "\n Дерево"
+                printfn "\n Р”РµСЂРµРІРѕ"
                 print_tree(derevo)
 
-                // Применяем фолд
-                printfn "Результат"
-                MyFold(derevo) |> List.iter (printfn "%.3f")
+                // РџСЂРёРјРµРЅСЏРµРј С„РѕР»Рґ
+                printfn "Р РµР·СѓР»СЊС‚Р°С‚"
+                let xxx = MyFold(check_if_only_one, derevo, []) 
+                xxx |> List.iter (printfn "%.3f")
                 
 
             next_func()
 
             
-        // Ввод из файла
+        // Р’РІРѕРґ РёР· С„Р°Р№Р»Р°
         | "3" -> 
-            printfn "Укажите путь к текстовому файлу:"
+            printfn "РЈРєР°Р¶РёС‚Рµ РїСѓС‚СЊ Рє С‚РµРєСЃС‚РѕРІРѕРјСѓ С„Р°Р№Р»Сѓ:"
             
             let filepath = Console.ReadLine()
             
             if IO.File.Exists(filepath) then
                 let col = col_input()
                 
-                // Проверка
+                // РџСЂРѕРІРµСЂРєР°
                 if col <= 0 then 
-                    printfn " Невозможно создать последовательность %d cтрок" col
+                    printfn " РќРµРІРѕР·РјРѕР¶РЅРѕ СЃРѕР·РґР°С‚СЊ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЊ %d cС‚СЂРѕРє" col
                 else 
                     ()
 
             else 
-                printfn "Некорректно указан путь к файлу"
+                printfn "РќРµРєРѕСЂСЂРµРєС‚РЅРѕ СѓРєР°Р·Р°РЅ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ"
                         
             next_func()
 
         
-        // Возврат в Main 
+        // Р’РѕР·РІСЂР°С‚ РІ Main 
         | "4" -> main()
 
-        // Повторный ввод
+        // РџРѕРІС‚РѕСЂРЅС‹Р№ РІРІРѕРґ
         | _ ->
-            printfn "Ошибка ввода"
+            printfn "РћС€РёР±РєР° РІРІРѕРґР°"
             next_func ()  
     ()
 
