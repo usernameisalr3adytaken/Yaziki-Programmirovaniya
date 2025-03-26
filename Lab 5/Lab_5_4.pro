@@ -1,3 +1,7 @@
+/*
+	Не является решением задачи
+*/
+
 DOMAINS
 	sl=string*
 PREDICATES
