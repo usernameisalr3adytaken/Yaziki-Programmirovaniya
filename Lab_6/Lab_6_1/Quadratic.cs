@@ -1,8 +1,8 @@
 ﻿class Quadratic : Integers
 {
-    public int aCoef { get; set; }
-    public int bCoef { get; set; }
-    public int cCoef { get; set; }
+    private int aCoef { get; set; }
+    private int bCoef { get; set; }
+    private int cCoef { get; set; }
 
     public Quadratic() : base() { }
     public Quadratic(int a, int b, int c) : base (a, b, c)
