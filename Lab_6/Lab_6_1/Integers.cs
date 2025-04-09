@@ -2,9 +2,9 @@
 
 class Integers
 {
-    public int aValue { get; set; }
-    public int bValue { get; set; }
-    public int cValue { get; set; }
+    private int aValue { get; set; }
+    private int bValue { get; set; }
+    private int cValue { get; set; }
 
     public Integers()
     {
