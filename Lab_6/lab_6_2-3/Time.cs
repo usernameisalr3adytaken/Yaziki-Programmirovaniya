@@ -2,8 +2,8 @@
 
 class Time
 {
-    public byte hours { get; set; }
-    public byte minutes { get; set; }
+    private byte hours { get; set; }
+    private byte minutes { get; set; }
 
     public Time()
     {
