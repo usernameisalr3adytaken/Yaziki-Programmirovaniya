@@ -2,82 +2,82 @@
 
 class Time
 {
-    private byte hours { get; set; }
-    private byte minutes { get; set; }
+    private byte _hours { get; set; }
+    private byte _minutes { get; set; }
 
     public Time()
     {
-        hours = (byte)InputDataWithCheck.InputIntegerWithValidation($"\nВведите Часы (от 0 до 23)", 0, 23);
-        minutes = (byte)InputDataWithCheck.InputIntegerWithValidation($"Введите Минуты (от 0 до 59)", 0, 59);
+        _hours = (byte)InputDataWithCheck.InputIntegerWithValidation($"\nВведите Часы (от 0 до 23)", 0, 23);
+        _minutes = (byte)InputDataWithCheck.InputIntegerWithValidation($"Введите Минуты (от 0 до 59)", 0, 59);
     }
 
     public Time(byte hours, byte minutes)
     {
-        this.hours = hours;
-        this.minutes = minutes;
+        this._hours = hours;
+        this._minutes = minutes;
     }
 
     public Time Difference(Time time)
     {
-        if (time.minutes > this.minutes)
+        if (time._minutes > this._minutes)
         {
-            this.hours -= 1;
-            this.minutes = (byte)(60 - (time.minutes - this.minutes));
+            this._hours -= 1;
+            this._minutes = (byte)(60 - (time._minutes - this._minutes));
         }
         else
-            this.minutes -= time.minutes;
+            this._minutes -= time._minutes;
 
-        if (time.hours > this.hours)
-            this.hours = (byte)(24 - (time.hours - this.hours));
+        if (time._hours > this._hours)
+            this._hours = (byte)(24 - (time._hours - this._hours));
         else
-            this.hours -= time.hours;
+            this._hours -= time._hours;
         
         return this;
     }
 
     public static Time operator ++(Time obj)
     {
-        if (obj.minutes == 59)
+        if (obj._minutes == 59)
         {
-            if (obj.hours == 23)
-                obj.hours = 0;
+            if (obj._hours == 23)
+                obj._hours = 0;
             else
-                obj.hours = (byte)(obj.hours + 1);
+                obj._hours = (byte)(obj._hours + 1);
 
-            obj.minutes = 0;
+            obj._minutes = 0;
         }
         else
-           obj.minutes = (byte)(obj.minutes + 1);
+           obj._minutes = (byte)(obj._minutes + 1);
 
 
         return obj;
     }
     public static Time operator --(Time obj)
     {
-        if (obj.minutes == 0)
+        if (obj._minutes == 0)
         {
-            if (obj.hours == 0)
-                obj.hours = 23;
+            if (obj._hours == 0)
+                obj._hours = 23;
             else
-                obj.hours = (byte)(obj.hours - 1);
+                obj._hours = (byte)(obj._hours - 1);
 
-            obj.minutes = 59;
+            obj._minutes = 59;
         }
         else
-            obj.minutes = (byte)(obj.minutes - 1);
+            obj._minutes = (byte)(obj._minutes - 1);
 
         return obj;
     }
 
     public int TimeLength()
     {
-        int lenght = (int)(this.hours * 60 + this.minutes);
+        int lenght = (int)(this._hours * 60 + this._minutes);
         return lenght;
     }
 
     public bool TimeNull()
     {
-        if (this.hours != 0 || this.minutes != 0)
+        if (this._hours != 0 || this._minutes != 0)
             return true;
         else 
             return false;
@@ -85,19 +85,19 @@ class Time
 
     public static bool operator >(Time time1, Time time2)
     {
-        return (int)(time1.hours*60 + time1.minutes) > (int)(time2.hours*60 + time2.minutes);
+        return (int)(time1.hours*60 + time1._minutes) > (int)(time2._hours*60 + time2._minutes);
     }
     public static bool operator <(Time time1, Time time2)
     {
-        return (int)(time1.hours * 60 + time1.minutes) < (int)(time2.hours * 60 + time2.minutes);
+        return (int)(time1._hours * 60 + time1._minutes) < (int)(time2._hours * 60 + time2._minutes);
     }
 
     public override string ToString()
     {
-        if (minutes < 10)
-            return $"Время = {hours}" + $":0{minutes}";
+        if (_minutes < 10)
+            return $"Время = {_hours}" + $":0{_minutes}";
         else
-            return $"Время = {hours}" + $":{minutes}";
+            return $"Время = {_hours}" + $":{_minutes}";
     }
 
 }
