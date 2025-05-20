@@ -1,0 +1,262 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Time operator" Height="500" Width="800"
+        Background="#FFE0E0E0"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid x:Name="startGrid" 
+        Width="750" Height="470">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+
+
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                Width="750" Height="60" 
+                HorizontalContentAlignment="Center" VerticalAlignment="Top" 
+                FontFamily="Bahnschrift SemiBold" FontSize="24" 
+                VerticalContentAlignment="Center">
+            Для работы необходимо указать временные значения
+        </Label>
+
+        <Label Grid.Column="0" Grid.Row="0" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="25" 
+                Margin="130,50,0,0">
+            Первое время
+        </Label>
+
+        <TextBox Name="h1"
+                Grid.Column="0" Grid.Row="0"
+                Width="80" Height ="30" Background="White" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="20" 
+                TextAlignment="Center" Margin="125,90,0,0"/>
+
+        <Label Grid.Column="0" Grid.Row="0" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="25" 
+                Margin="207,80,0,0">:</Label>
+
+        <TextBox Name="m1" 
+                Grid.Column="0" Grid.Row="0"
+                Width="80" Height ="30" Background="White" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="20" 
+                TextAlignment="Center" Margin="225,90,0,0"/>
+
+        <Label Grid.Column="0" Grid.Row="0" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="15" 
+                Margin="145,110,0,0" Foreground="Gray">
+            часы
+        </Label>
+
+        <Label Grid.Column="0" Grid.Row="0" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="15" 
+                Margin="235,110,0,0" Foreground="Gray">
+            минуты
+        </Label>
+
+        <!---->
+
+        <Label Grid.Column="1" Grid.Row="0" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="25" 
+                Margin="70,50,0,0">
+            Второе время
+        </Label>
+
+        <TextBox Name="h2"
+                Grid.Column="1" Grid.Row="0"
+                Width="80" Height ="30" Background="White" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="20" 
+                TextAlignment="Center" Margin="65,90,0,0"/>
+
+        <Label Grid.Column="1" Grid.Row="0" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="25" 
+                Margin="147,80,0,0">:</Label>
+
+        <TextBox Name="m2"
+                Grid.Column="1" Grid.Row="0"
+                Width="80" Height ="30" Background="White" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="20" 
+                TextAlignment="Center" Margin="165,90,0,0" />
+
+        <Label Grid.Column="1" Grid.Row="0" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="15" 
+                Margin="85,110,0,0" Foreground="Gray">
+            часы
+        </Label>
+
+        <Label Grid.Column="1" Grid.Row="0" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="15" 
+                Margin="175,110,0,0" Foreground="Gray">
+            минуты
+        </Label>
+
+        <Button Name="oneDif"
+                Grid.Column="0" Grid.Row="1"
+                Width="150" Height ="50" Background="#7ea1db" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="16" 
+                Margin="75,10,0,0" Click="oneDif_Click" >
+            <TextBlock TextAlignment="Center" >
+                Вычесть из первого
+                <LineBreak/>
+                времени второе
+            </TextBlock>
+        </Button>
+
+        <Button Name="twoDif"
+                Grid.Column="1" Grid.Row="1"
+                Width="150" Height ="50" Background="#7ea1db" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="16" 
+                Margin="145,10,0,0" Click="twoDif_Click" >
+            <TextBlock TextAlignment="Center" >
+                Вычесть из второго
+                <LineBreak/>
+                времени первое
+            </TextBlock>
+        </Button>
+
+        <Button Name="onePlus"
+                Grid.Column="0" Grid.Row="1"
+                Width="150" Height ="50" Background="#7ea1db" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="16" 
+                Margin="15,100,0,0" Click="onePlus_Click" >
+            <TextBlock TextAlignment="Center" >
+                Увеличить минуты
+                <LineBreak/>
+                в первом времени
+            </TextBlock>
+        </Button>
+
+        <Button Name="twoPlus"
+                Grid.Column="1" Grid.Row="1"
+                Width="150" Height ="50" Background="#7ea1db" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="16" 
+                Margin="15,100,0,0" Click="twoPlus_Click" >
+            <TextBlock TextAlignment="Center" >
+                Увеличить минуты
+                <LineBreak/>
+                во втором времени
+            </TextBlock>
+        </Button>
+
+        <Button Name="comp"
+                Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                Width="150" Height ="50" Background="#7ea1db" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="16" 
+                Margin="300,10,0,0" Click="comp_Click" >
+            <TextBlock TextAlignment="Center" >
+                Сравнить два
+                <LineBreak/>
+                времени
+            </TextBlock>
+        </Button>
+
+        <Button Name="twoMinus"
+                Grid.Column="1" Grid.Row="1"
+                Width="150" Height ="50" Background="#7ea1db" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="16" 
+                Margin="205,100,0,0" Click="twoMinus_Click" >
+            <TextBlock TextAlignment="Center" >
+                Уменьшить минуты
+                <LineBreak/>
+                во втором времени
+            </TextBlock>
+        </Button>
+
+        <Button Name="oneMinus"
+                Grid.Column="0" Grid.Row="1"
+                Width="150" Height ="50" Background="#7ea1db" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="16" 
+                Margin="205,100,0,0" Click="oneMinus_Click" >
+            <TextBlock TextAlignment="Center" >
+                Уменьшить минуты
+                <LineBreak/>
+                в первом времени
+            </TextBlock>
+        </Button>
+
+        <Button Name="oneNull"
+                Grid.Column="0" Grid.Row="2"
+                Width="150" Height ="50" Background="#7ea1db" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="16" 
+                Margin="15,50,0,0" Click="oneNull_Click" >
+            <TextBlock TextAlignment="Center" >
+                Проверить первое
+                <LineBreak/>
+                время на 00:00
+            </TextBlock>
+        </Button>
+
+        <Button Name="twoNull"
+                Grid.Column="1" Grid.Row="2"
+                Width="150" Height ="50" Background="#7ea1db" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="16" 
+                Margin="15,50,0,0" Click="twoNull_Click">
+            <TextBlock TextAlignment="Center" >
+                Проверить второе
+                <LineBreak/>
+                время на 00:00
+            </TextBlock>
+        </Button>
+
+        <Button Name="twoMin"
+                Grid.Column="1" Grid.Row="2"
+                Width="150" Height ="50" Background="#7ea1db" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="16" 
+                Margin="205,50,0,0" Click="twoMin_Click">
+            <TextBlock TextAlignment="Center" >
+                Перевести второе
+                <LineBreak/>
+                время в минуты
+            </TextBlock>
+        </Button>
+
+        <Button Name="oneMin"
+                Grid.Column="0" Grid.Row="2"
+                Width="150" Height ="50" Background="#7ea1db" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" FontSize="16" 
+                Margin="205,50,0,0" Click="oneMin_Click">
+            <TextBlock TextAlignment="Center" >
+                Перевести первое
+                <LineBreak/>
+                время в минуты
+            </TextBlock>
+        </Button>
+    </Grid>
+
+</Window>
+
