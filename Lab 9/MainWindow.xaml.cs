@@ -26,7 +26,6 @@ namespace WpfApp1
         {
             InitializeComponent();
 
-            FillInput();
         }
 
         /// <summary>
